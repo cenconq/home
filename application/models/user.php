@@ -4,7 +4,7 @@ class User extends DataMapper {
 
     var $table = 'users';
 
-    var $has_one = array('suburb');
+    var $has_one = array('suburb', 'file');
     var $has_many = array('role', 'property');
     
     var $validation = array(
