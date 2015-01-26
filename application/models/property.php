@@ -14,7 +14,7 @@ class Property extends DataMapper {
         ),
         'address' => array(
             'label' => 'Address',
-            'rules' => array('required', 'trim', 'alpha', 'max_length' => 45)
+            'rules' => array('required', 'trim', 'max_length' => 45)
         ),
         'house_size' => array(
             'label' => 'House Size',
