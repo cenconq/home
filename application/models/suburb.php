@@ -5,7 +5,7 @@ class Suburb extends DataMapper {
     var $table = 'suburbs';
 
     var $has_one = array('state');
-    var $has_many = array('user');
+    var $has_many = array('user', 'property');
     
     var $validation = array(
         'name' => array(
