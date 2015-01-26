@@ -10,7 +10,7 @@ class Suburb extends DataMapper {
     var $validation = array(
         'name' => array(
             'label' => 'Name',
-            'rules' => array('required', 'trim', 'alpha', 'max_length' => 45),
+            'rules' => array('required', 'trim', 'unique', 'alpha', 'max_length' => 45),
         ),
         'state' => array(
             'label' => 'State',

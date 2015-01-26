@@ -27,7 +27,11 @@ class User extends DataMapper {
         'suburb' => array(
             'label' => 'Suburb',
             'rules' => array('required')
-        )
+        ),
+        'file' => array(
+            'label' => 'File',
+            'rules' => array('required')
+        )        
     );
 
     function __construct($id = NULL)

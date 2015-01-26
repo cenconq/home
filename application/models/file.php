@@ -22,11 +22,7 @@ class File extends DataMapper {
         'weight' => array(
             'label' => 'Weight',
             'rules' => array('required', 'trim', 'integer'),
-        ),
-        'user' => array(
-            'label' => 'User',
-            'rules' => array('required'),
-        )                               
+        )                            
     );
 
     function __construct($id = NULL)

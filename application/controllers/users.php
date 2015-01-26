@@ -8,7 +8,7 @@ class Users extends REST_Controller {
 		parent::__construct();
 	}
 
-	public function rest_get($id)
+	public function rest_get($id=FALSE)
 	{
 		$u = new user();
 
@@ -40,16 +40,22 @@ class Users extends REST_Controller {
         $u->create_date = date('Y-m-d H:i:s');
         $u->last_update = date('Y-m-d H:i:s');
 
+        // Suburb Relationship
 		$s = new suburb();
 		$s->where('id', $this->put('suburb'))->get();
 
-		$u->save($s);
+		// File Relationship
+		$f = new file();
+		$f->where('id', $this->put('file'))->get();		
+
+		// Relate the user to them
+        $u->save( array($s, $f) );
 
 		print $u->error->string;
 	}
 
 	// Edit exist User
-	public function rest_post($id)
+	public function rest_post($id=FALSE)
 	{
 		if ( $id ) {
 	    	$u = new user($id);
@@ -60,6 +66,7 @@ class Users extends REST_Controller {
 	        $u->password = $this->post('password');
 	        $u->last_update = date('Y-m-d H:i:s');
 
+	        // Suburb Relationship
 			$s = new suburb();
 			$s->where('id', $this->post('suburb'))->get();
 
@@ -69,7 +76,7 @@ class Users extends REST_Controller {
 		}
 	}
 
-	public function rest_delete($id)
+	public function rest_delete($id=FALSE)
 	{
 		// Delete User by ID
 		if( $id ){
