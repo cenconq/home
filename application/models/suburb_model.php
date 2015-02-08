@@ -4,9 +4,10 @@ class Suburb_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        $this->load->library( 'uuid' );
     }
 
-    public function get( $id = 0 ) {
+    public function get( $id = 0, $isArray = FALSE ) {
         if ( $id ) {
             // Return one suburb
             $query = $this->db->get_where( 'suburbs', array( 'id' => $id ) );
@@ -15,13 +16,27 @@ class Suburb_model extends CI_Model {
             $query = $this->db->get( 'suburbs' );
         }
 
+        // Return Result as Array
+        if ( $isArray ) {
+
+            $suburbs = array();
+
+            foreach ( $query->result() as $suburb) {
+                $suburbs[ $suburb->id ] = $suburb->name;
+            }
+
+            return $suburbs;
+        }
+
+        // Return Result as Object
         return $query->result();
     }
 
     public function put() {
         $data = array(
-            'name'  => $this->input->post( 'name' ),
-            'state_id'   => $this->input->post( 'state_id' )
+            'id'        => $this->uuid->v4( TRUE ),
+            'name'      => $this->input->post( 'name' ),
+            'state_id'  => $this->input->post( 'state_id' )
         );
 
         $this->db->insert( 'suburbs', $data );

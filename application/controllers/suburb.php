@@ -15,10 +15,10 @@ class Suburb extends CI_Controller {
 
     public function get( $id = 0 ) {
         if ( $id ) {
-            return $this->suburb_model->get( $id ) );
+            return $this->suburb_model->get( $id );
         }
 
-        return $this->suburb_model->get() );
+        return $this->suburb_model->get();
     }
 
     public function get_all() {
@@ -27,11 +27,13 @@ class Suburb extends CI_Controller {
 
     public function put() {
 
+        $this->load->model( 'state_model' );
+
         $config = array(
             array(
                 'field'   => 'name',
                 'label'   => 'Name',
-                'rules'   => 'trim|required'
+                'rules'   => 'trim|required|alpha|is_unique[suburbs.name]'
             ),
             array(
                 'field'   => 'state_id',
@@ -40,13 +42,15 @@ class Suburb extends CI_Controller {
             ),
         );
 
+        $data = array( 'states' => $this->state_model->get(0, TRUE) );
+
         $this->form_validation->set_rules( $config );
 
         if ( $this->form_validation->run() == FALSE ) {
-            $this->load->view( 'user/put' );
+            $this->load->view( 'suburb/put', $data);
         }
         else {
-            $this->user_model->put();
+            $this->suburb_model->put();
         }
     }
 

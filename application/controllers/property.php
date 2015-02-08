@@ -2,7 +2,8 @@
 
 class Property extends CI_Controller {
 
-    function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->load->library( 'form_validation' );
@@ -11,7 +12,8 @@ class Property extends CI_Controller {
 
     /* REQUEST HANDLERS */
 
-    public function get( $id = 0 ) {
+    public function get( $id = 0 )
+    {   
         if ( $id ) {
             return $this->property_model->get( $id );
         }
@@ -19,8 +21,8 @@ class Property extends CI_Controller {
         return $this->property_model->get();
     }
 
-    public function put() {
-
+    public function put() 
+    {
         $config = array(
             array(
                 'field'   => 'price',
@@ -94,6 +96,17 @@ class Property extends CI_Controller {
         }
     }
 
+    public function put_images( $id = 0 )
+    {
+        if ( ! $id ) {
+            return FALSE;
+        }
+
+        $this->load->library( 'images_upload' );
+        $this->images_upload->upload( $id );
+        $this->load->view( 'property/put_images' );
+    }    
+
     public function post() {
         $this->property_model->post();
     }
@@ -107,6 +120,8 @@ class Property extends CI_Controller {
     }
 
     /* PAGES - Link with VIEW */
+
+    /* Search Result*/
     public function search_result() {
         $this->load->model( 'suburb_model' );
         $this->load->library( 'pagination' );

@@ -358,5 +358,25 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+/*
+|--------------------------------------------------------------------------
+| Image Upload / Resize Settings
+|--------------------------------------------------------------------------
+|
+| URL to your upload the thumb / Original images
+|
+*/
+
+$config['image_library']  = 'gd2';
+$config['original_path']  = '/Users/roy/Documents/website/webtify/application/files/original/';
+$config['thumb_path']     = '/Users/roy/Documents/website/webtify/application/files/thumb/';
+$config['allowed_types']  = 'gif|jpg|png|jpeg';
+$config['width'] 		  = 500;
+$config['height'] 		  = 500;
+$config['max_size'] 	  = 10000;
+$config['maintain_ratio'] = TRUE;
+$config['overwrite'] 	  = FALSE;
+$config['encrypt_name']   = TRUE;
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -4,6 +4,7 @@ class Property_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
+        $this->load->library( 'uuid' );
     }
 
     public function get( $id = 0 ) {
@@ -20,7 +21,10 @@ class Property_model extends CI_Model {
     }
 
     public function put() {
+        $uuid = $this->uuid->v4( TRUE );
+
         $data = array(
+            'id'         => $uuid,
             'price'      => $this->input->post( 'price' ),
             'address'    => $this->input->post( 'address' ),
             'house_size' => $this->input->post( 'house_size' ),
@@ -73,7 +77,7 @@ class Property_model extends CI_Model {
         $order_by   = $this->uri->segment( 6, 0 );
         $limit      = $this->uri->segment( 7, 0 );
         $offset     = $this->uri->segment( 8, 0 );
-        
+
         $this->db->select()->from( 'properties' );
 
         if ( $price ) {

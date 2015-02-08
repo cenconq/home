@@ -5,8 +5,8 @@
 <body>
 <?php echo validation_errors(); ?>
 
-<h1>Registration</h1>
-<?php echo form_open('property/put'); ?>
+<h1>Add Property</h1>
+<?php echo form_open_multipart( 'property/put' ); ?>
 
 <label>Price</label>
 <input type="text" name="price" value="" size="50" />

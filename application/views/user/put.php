@@ -21,18 +21,6 @@
 <input type="password" name="password" value="" size="50" />
 <br />
 <label>Suburb</label>
-<?php
-$options = array(
-                  'small'  => 'Small Shirt',
-                  'med'    => 'Medium Shirt',
-                  'large'   => 'Large Shirt',
-                  'xlarge' => 'Extra Large Shirt',
-                );
-
-$shirts_on_sale = array('small', 'large');
-
-echo form_dropdown('shirts', $options, 'large');
-?>
 <br />
 <div><input type="submit" value="Submit" /></div>
 
