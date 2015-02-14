@@ -2,17 +2,15 @@
 
 class Suburb extends CI_Controller {
 
-    function __construct() {
+    public function __construct() {
         parent::__construct();
 
         $this->load->library( 'form_validation' );
         $this->load->model( 'suburb_model' );
     }
 
-    public function index() {
-        $this->load->view( 'suburb/index' );
-    }
-
+    /* REQUEST HANDLERS */
+    
     public function get( $id = 0 ) {
         if ( $id ) {
             return $this->suburb_model->get( $id );

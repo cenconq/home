@@ -2,8 +2,7 @@
 
 class Property extends CI_Controller {
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
 
         $this->load->library( 'form_validation' );
@@ -86,10 +85,14 @@ class Property extends CI_Controller {
             )
         );
 
+        $this->load->model( 'suburb_model' );
+
+        $data = array( 'suburbs' => $this->suburb_model->get(0, TRUE) );
+    
         $this->form_validation->set_rules( $config );
 
         if ( $this->form_validation->run() == FALSE ) {
-            $this->load->view( 'property/put' );
+            $this->load->view( 'property/put', $data );
         }
         else {
             $this->property_model->put();
@@ -119,7 +122,7 @@ class Property extends CI_Controller {
         $this->property_model->search();
     }
 
-    /* PAGES - Link with VIEW */
+    /* Activities */
 
     /* Search Result*/
     public function search_result() {

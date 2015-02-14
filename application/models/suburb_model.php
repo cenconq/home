@@ -2,12 +2,14 @@
 
 class Suburb_model extends CI_Model {
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->library( 'uuid' );
     }
 
-    public function get( $id = 0, $isArray = FALSE ) {
+    public function get( $id = 0, $isArray = FALSE )
+    {
         if ( $id ) {
             // Return one suburb
             $query = $this->db->get_where( 'suburbs', array( 'id' => $id ) );

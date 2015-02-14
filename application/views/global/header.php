@@ -1,4 +1,8 @@
 <header>
+	<div class="login_status">
+		<?php print_r($this->session->userdata('email')); ?>
+			<a href="user/logout">Logout</a>
+	</div>
 	<div class="logo_wrapper">Fang Dong</div>
 	<div class="menu_wrapper">
 		<ul>

@@ -2,11 +2,6 @@
 
 class Images_upload {
 
-	public function __construct()
-	{
-
-	}
-
 	public function upload( $id )
 	{
 		$CI =& get_instance();
