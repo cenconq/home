@@ -1,29 +1,23 @@
 <header>
-	<div class="login_status">
-		<?php print_r($this->session->userdata('email')); ?>
-			<a href="user/logout">Logout</a>
-	</div>
-	<div class="logo_wrapper">Fang Dong</div>
-	<div class="menu_wrapper">
-		<ul>
-			<li>
-				<a href="#">住宅</a>
-			</li>
-			<li>
-				<a href="#">新盘/新房</a>
-			</li>
-			<li>
-				<a href="#">土地/购地建房套餐</a>
-			</li>
-			<li>
-				<a href="#">商业地产</a>
-			</li>
-			<li>
-				<a href="#">相关资料</a>
-			</li>
-			<li>
-				<a href="#">联络我们</a>
-			</li>
-		</ul>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 login_status">
+				<?php print_r($this->session->userdata('email')); ?>
+				<a href="/user/login">亲，请登录</a>
+				<span class="sep">|</span>
+				<a href="/user/put">免费注册</a>
+				<span class="sep">|</span>
+				<a href="/user/logout">注销</a>
+			</div>
+		</div>
 	</div>
 </header>
+<div role='logo'>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 logo_wrapper">
+				<a href="/"><img src="/assets/images/logo.png" style="width:100px;"></a>
+			</div>
+		</div>
+	</div>
+</div>

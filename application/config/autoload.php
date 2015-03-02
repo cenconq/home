@@ -64,7 +64,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form');
+$autoload['helper'] = array('url','form','text');
 
 
 /*
@@ -121,7 +121,7 @@ $autoload['model'] = array();
 |
 */
 
-$autoload['libraries'] = array('database' ,'session');
+$autoload['libraries'] = array( 'database' ,'session', 'template' );
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

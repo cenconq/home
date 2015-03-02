@@ -9,11 +9,13 @@ class User_model extends CI_Model {
         $this->load->library( 'secure' );
     }
 
-    public function get()
+    public function get( $id )
     {
-        if ( $id = $this->uri->segment( 3 ) ) {
+        if ( $id ) {
             $query = $this->db->get_where( 'users', array( 'id' => $id ) );
-        }else {
+        }
+        else
+        {
             $query = $this->db->get( 'users' );
         }
 
@@ -22,25 +24,33 @@ class User_model extends CI_Model {
 
     public function put()
     {
-        $salt = $this->secure->salt();
-        $pass = $this->input->post( 'password' );
+        $salt     = $this->secure->salt();
+        $password = $this->input->post( 'password' );
+        $user_id  = $this->uuid->v4( TRUE );
 
         $data = array(
-            'id'          => $this->uuid->v4( TRUE ),
+            'id'          => $user_id,
             'first_name'  => $this->input->post( 'first_name' ),
             'last_name'   => $this->input->post( 'last_name' ),
             'email'       => $this->input->post( 'email' ),
-            'password'    => $this->secure->encrypt( $pass, $salt ),
+            'password'    => $this->secure->encrypt( $password, $salt ),
             'salt'        => $salt,
             'suburb_id'   => $this->input->post( 'suburb_id' ),
             'create_date' => date( 'Y-m-d H:i:s' ),
             'last_update' => date( 'Y-m-d H:i:s' )
         );
 
+        $role = array(
+            'id'          => $this->uuid->v4( TRUE ),
+            'role_id'     => 'dd4003908cb349bba6a393c6f36ba83a',
+            'user_id'     => $user_id
+        );
+
         $this->db->insert( 'users', $data );
+        $this->db->insert( 'roles_users', $role );
     }
 
-    public function post()
+    public function post( $id )
     {
         $data = array(
             'first_name'  => $this->input->post( 'first_name' ),
@@ -51,21 +61,23 @@ class User_model extends CI_Model {
             'last_update' => date( 'Y-m-d H:i:s' )
         );
 
-        $id = $this->uri->segment( 3 );
         $this->db->where( 'id', $id );
         $this->db->update( 'users', $data );
     }
 
-    public function delete()
+    public function delete( $id )
     {
-        $id = $this->uri->segment( 3 );
+        $data = array(
+            'id' => $id
+        );
+
         $this->db->delete( 'users', array( 'id' => $id ) );
     }
 
     public function login()
     {
-        $email = $this->input->post( 'email' );
-        $pass  = $this->input->post( 'password' );
+        $email    = $this->input->post( 'email' );
+        $password = $this->input->post( 'password' );
 
         $this->db->select( 'id, email, password, salt' )
                  ->from( 'users' )
@@ -80,7 +92,7 @@ class User_model extends CI_Model {
         }
 
         // Login Success if password matched
-        if ( $this->secure->encrypt( $pass, $query->row('salt') ) === $query->row('password') ) {
+        if ( $this->secure->encrypt( $password, $query->row('salt') ) === $query->row('password') ) {
             return TRUE;
         }
     }

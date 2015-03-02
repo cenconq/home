@@ -1,0 +1,33 @@
+div[role=bottom]{
+	background: $bottom-background;
+	padding: $global-padding-l;
+}
+
+.footer-service-wrapper{
+	&{
+
+	}
+
+	.footer-service{
+		&{
+			text-align: center;
+			text-shadow: $light-text-shadow;
+		}
+
+		i{
+			color: $light-font-color;
+			font-size: 2.5em;
+			display: block;
+			margin: 0 0 12px;
+		}
+
+		span{
+			color: #000;
+			font-size: 1.2em;
+		}	
+
+		&:hover i{
+			color: $primary-color;
+		}
+	}
+}

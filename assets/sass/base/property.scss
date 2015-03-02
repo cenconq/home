@@ -1,0 +1,28 @@
+#get_result_gallery {
+	&{
+	}
+
+	p{
+		margin: 10px 0;
+	}
+}
+
+h3{
+	&{
+
+	}
+		
+	&.sub-title{
+		background-color: #FFF;
+		border: 1px solid #D9D9DD;
+		font-size: 1em;
+		padding: 10px;
+		text-decoration: none;
+		@include border-radius(5px);
+		@include background-gradient(top,  #fefefe, #f4f4f4);
+		@include box-shadow(inset, 1px, 0, 0, 0, #fff);	
+	}
+}
+
+.price{	
+}

@@ -143,25 +143,31 @@ class Property extends CI_Controller {
             'uri_segment' => 8,
             'total_rows'  => $this->property_model->search_counter(),
             'per_page'    => $limit,
-            'num_links'   => 10,
-            'next_link'   => '下一页',
-            'prev_link'   => '上一页'
+            'num_links'   => 4,
+            'next_link'   => '<i class="fa fa-chevron-right"></i>',
+            'prev_link'   => '<i class="fa fa-chevron-left"></i>',
+            'last_link'   => '<i class="fa fa-step-forward"></i>',
+            'first_link'  => '<i class="fa fa-step-backward"></i>'
         );
 
         $this->pagination->initialize( $config );
 
         $data = array(
-            'properties'   => $this->property_model->search(),
+            'properties'   => $this->property_model->search( $price, $bedrooms, $suburb_id, $order_by, $limit, $offset ),
             'suburbs'      => $this->suburb_model->get(),
             'pagination'   => $this->pagination->create_links(),
             'total_result' => $this->property_model->search_counter(),
         );
 
-        $this->load->view( 'property/result', $data );
+        $this->template->load('html', 'property/search_result', $data);
     }
 
     public function get_result( $id ) {
-        print_r( $this->property_model->get( $id ) );
+        $data = array(
+            'property' => $this->property_model->get( $id )
+        );
+
+        $this->template->load('plain', 'property/get_result', $data);
     }
 }
 

@@ -1,9 +1,28 @@
-<?php echo validation_errors(); ?>
-	<h1>User Login</h1>
-	<?php echo form_open( 'user/login' ); ?>
-	<label>Email</label> <input type="text" name="email" value="" size="50"><br>
-	<label>Password</label> <input type="text" name="password" value="" size="50"><br>
-	<input type="submit" value="Submit">
-</form>
-<a href="/user/put">Create new account</a><br />
-<a href="/user/forgot">Forgot password</a>
+<div class="row">
+	<div class="col-lg-8">Map</div>
+	<div class="col-lg-4">
+		<?php echo validation_errors(); ?>
+		<div class="block">
+			<h2 class="block-title"><i class="fa fa-lock fa-fw"></i>&nbsp;登录</h2>
+			<?php echo form_open( 'user/login' ); ?>
+			<div class="form-group">
+			    <div class="input-group">
+			      <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+			      <input type="text" placeholder="邮箱" class="form-control">
+			    </div>
+		    </div>
+		    <div class="form-group">
+			    <div class="input-group">
+			      <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+			      <input type="password" placeholder="密码" class="form-control">
+			    </div>
+		    </div>
+		    <div class="form-group">
+				<input type="submit" value="登录" class="btn" />
+			</div>
+			<a href="/user/put">免费注册</a><br />
+			<a href="/user/forgot">忘记登录密码?</a>			
+			</form>
+		</div>	
+	</div>
+</div>

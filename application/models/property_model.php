@@ -7,13 +7,13 @@ class Property_model extends CI_Model {
         $this->load->library( 'uuid' );
     }
 
-    public function get( $id = 0 ) {
+    public function get( $id = 0, $limit = 10 ) {
         if ( $id ) {
             // Return one property
             $query = $this->db->get_where( 'properties', array( 'id' => $id ) );
         }else {
             // Return all properties
-            $query = $this->db->get( 'properties' );
+            $query = $this->db->get( 'properties', $limit );
         }
 
         return $query->result();
@@ -69,14 +69,7 @@ class Property_model extends CI_Model {
         $this->db->delete( 'properties', array( 'id' => $id ) );
     }
 
-    public function search() {
-        // Get URL arguments
-        $price      = $this->uri->segment( 3, 0 );
-        $bedrooms   = $this->uri->segment( 4, 0 );
-        $suburb_id  = $this->uri->segment( 5, 0 );
-        $order_by   = $this->uri->segment( 6, 0 );
-        $limit      = $this->uri->segment( 7, 0 );
-        $offset     = $this->uri->segment( 8, 0 );
+    public function search( $price, $bedrooms, $suburb_id, $order_by, $limit, $offset ) {
 
         $this->db->select()->from( 'properties' );
 

@@ -1,0 +1,30 @@
+nav{
+	&{
+		background: #fff;
+		border: 1px solid #E5E5E5;
+		border-width: 0 0 1px;
+		padding: $global-padding;
+	}
+
+	ul{
+		li{
+			&{
+				list-style: none;
+			}
+
+			a{
+				&{
+					float: left;
+					font-size: 1.1em;
+					margin-right: 70px;
+					color: $menu-font-color;					
+				}
+
+				&:hover{
+					color: $menu-font-hover;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+@import "variables";
+@import "maxin";
+@import "reset";
+@import "global";
+@import "header";
+@import "logo";
+@import "menu";
+@import "main";
+@import "search";
+@import "property";
+@import "footer";
+@import "bottom";
+
+body {
+    @include border-radius(10px);
+    background: $body-color;
+    font-size: $base-fontsize;
+    font-family: $font-stack;
+}

@@ -1,0 +1,63 @@
+div[role=main]{
+	padding: $global-padding;
+}
+
+
+.main-new-house{
+	&{
+		border: 1px solid $border-color-light;
+		font-size: 1em;
+		height: 280px;
+		margin: 0 0 30px;
+
+		img{
+			height: 214px;
+			width: 100%;
+		}
+	}
+
+
+	&.first{
+		height: 590px;
+
+		img{
+			height: 468px;
+		}
+	}		
+}
+
+.main-news-wrapper{
+	&{
+		i{
+		}
+	}
+
+	.main-news{
+		&{
+			color: #626262;
+			display: block;
+			float: left;
+			width: 100%;
+			padding: 10px 0;
+			border-bottom: 1px solid $border-color-light;		
+		}
+
+		&:hover{
+			text-decoration: none;
+			color: $primary-color; 
+		}
+
+	}
+}
+
+.main-suburbs{
+	&{
+		list-style: none;
+	}
+
+	.main-suburb{
+		float: left;
+		float: left;
+		margin: 0 10px 0;		
+	}
+}

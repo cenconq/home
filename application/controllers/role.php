@@ -2,9 +2,10 @@
 
 class Role extends CI_Controller {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
+        $this->load->library( 'form_validation' );
         $this->load->model( 'role_model' );
     }
 
@@ -21,22 +22,19 @@ class Role extends CI_Controller {
             array(
                 'field'   => 'name', 
                 'label'   => 'Role Name', 
-                'rules'   => 'trim|required'
+                'rules'   => 'trim|required|max_length[45]|is_unique[roles.name]'
             ),                                          
         );
 
         $this->form_validation->set_rules($config);
 
-        $this->load->model( 'suburb_model' );
-        $data = array( 'suburbs' => $this->suburb_model->get(0, TRUE) );
-
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('user/put', $data);
+            $this->load->view('role/put');
         }
         else
         {
-            $this->user_model->put();
+            $this->role_model->put();
         }
 	}
 

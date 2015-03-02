@@ -5,6 +5,7 @@ class Main extends CI_Controller {
 	public function index()
 	{
 		$this->load->model( 'suburb_model' );
+		$this->load->model( 'property_model' );
 
 		$price = array(
 			0 => '无限制',
@@ -35,12 +36,25 @@ class Main extends CI_Controller {
 		}
 
 		$data = array(
-			'price' => $price,
-			'bedrooms' => $bedrooms,
-			'suburbs' => $suburbs
+			'price' 	  => $price,
+			'bedrooms'    => $bedrooms,
+			'suburbs' 	  => $suburbs,
+			'properties'  => $this->property_model->get( 0, 9 )
 		);
 
-		$this->load->view('main', $data);
+		$this->template->load('html', 'main', $data);
+	}
+
+	public function search()
+	{
+        $price      = $this->input->post( 'price' );
+        $bedrooms   = $this->input->post( 'bedrooms' );
+        $suburb_id  = $this->input->post( 'suburb_id' );
+        $order_by   = 'price';
+        $limit      = 10;
+        $offset		= 0;
+
+        redirect( 'property/search_result/' . $price . '/' . $bedrooms . '/' . $suburb_id . '/' . $order_by . '/' . $limit );	
 	}
 }
 

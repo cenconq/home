@@ -5,16 +5,17 @@ class User extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        
         $this->load->library('form_validation');
-        $this->load->model('user_model');
+        $this->load->model( 'user_model' );
+        $this->load->model( 'role_user_model' );
+        $this->load->model( 'suburb_model' );
     }
 
     /* REQUEST HANDLERS */
 
-	public function get()
+	public function get( $id = FALSE )
 	{
-		print_r($this->user_model->get());
+		return $this->user_model->get( $id );
 	}
 
 	public function put()
@@ -49,12 +50,12 @@ class User extends CI_Controller {
 
         $this->form_validation->set_rules($config);
 
-        $this->load->model( 'suburb_model' );
+        
         $data = array( 'suburbs' => $this->suburb_model->get(0, TRUE) );
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('user/put', $data);
+            $this->template->load('plain', 'user/put', $data);
         }
         else
         {
@@ -64,13 +65,58 @@ class User extends CI_Controller {
 
 	public function post()
 	{
-		$this->user_model->post();	
+       $config = array(
+            array(
+                'field'   => 'id', 
+                'label'   => 'ID', 
+                'rules'   => 'trim|required'
+            ),        
+            array(
+                'field'   => 'first_name', 
+                'label'   => 'First Name', 
+                'rules'   => 'trim|required'
+            ),
+            array(
+                'field'   => 'last_name', 
+                'label'   => 'Last Name', 
+                'rules'   => 'trim|required'
+            ),
+            array(
+                'field'   => 'email', 
+                'label'   => 'Email', 
+                'rules'   => 'trim|required|valid_email|is_unique[users.email]'
+            ),
+            array(
+                'field'   => 'password', 
+                'label'   => 'Password', 
+                'rules'   => 'trim|required|min_length[8]'
+            ),
+            array(
+                'field'   => 'passconfirm', 
+                'label'   => 'Confirm Password', 
+                'rules'   => 'trim|required|match[password]'
+            ),                                                          
+        );
+
+        $this->form_validation->set_rules($config);
+
+        
+        $data = array( 'suburbs' => $this->suburb_model->get(0, TRUE) );
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->template->load('plain', 'user/post', $data);
+        }
+        else
+        {
+            $this->user_model->post();
+        }
 	}
 
-	public function delete()
+	public function delete( $id = FALSE )
 	{
-		$this->user_model->delete();
-	}
+		$this->user_model->delete( $id );
+	}    
 
     /* Activities */
 
@@ -93,7 +139,7 @@ class User extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('user/login');
+            $this->template->load('plain', 'user/login');
         }
         else
         {
@@ -133,7 +179,7 @@ class User extends CI_Controller {
                     
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('user/forgot');
+            $this->template->load('plain', 'user/forgot');
         }
         else
         {
